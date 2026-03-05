@@ -81,6 +81,8 @@ export default function App() {
   const [downloading, setDownloading] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const heroRef = useRef(null);
+  const animFrameRef = useRef(null); // tracks rAF id for cancellation
+
   const titles = [
     "Frontend Developer",
     "React.js & Next.js Developer",
@@ -102,6 +104,56 @@ export default function App() {
     document.body.removeChild(link);
     setTimeout(() => setDownloading(false), 2000);
   };
+
+  // ── Core: eased scroll engine ──────────────────────────────────
+  const smoothScrollTo = (targetY, duration = 800) => {
+    // Cancel any ongoing scroll animation before starting a new one
+    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    let startTime = null;
+
+    // EaseInOutCubic: slow → fast → slow
+    const easeInOutCubic = (t) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+      if (progress < 1) {
+        animFrameRef.current = requestAnimationFrame(step);
+      }
+    };
+
+    animFrameRef.current = requestAnimationFrame(step);
+  };
+
+  const scrollTo = (section) => {
+    const el = document.getElementById(section.toLowerCase());
+    if (!el) return;
+    const navHeight = 72;
+    const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+    smoothScrollTo(top, 800);
+    setMenuOpen(false);
+  };
+
+  const scrollToTop = () => smoothScrollTo(0, 700);
+
+  // Cancel rAF animation if user manually scrolls (wheel / touch)
+  useEffect(() => {
+    const cancel = () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+    window.addEventListener("wheel", cancel, { passive: true });
+    window.addEventListener("touchmove", cancel, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", cancel);
+      window.removeEventListener("touchmove", cancel);
+    };
+  }, []);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -158,19 +210,6 @@ export default function App() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const scrollTo = (section) => {
-    const el = document.getElementById(section.toLowerCase());
-    if (!el) return;
-    const navHeight = 72;
-    const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
-    window.scrollTo({ top, behavior: "smooth" });
-    setMenuOpen(false);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <div className="portfolio-root">
