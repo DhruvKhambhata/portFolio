@@ -79,8 +79,8 @@ export default function App() {
   const [hoveredSkill, setHoveredSkill] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [downloading, setDownloading] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const heroRef = useRef(null);
-
   const titles = [
     "Frontend Developer",
     "React.js & Next.js Developer",
@@ -153,11 +153,23 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollTo = (section) => {
-    document
-      .getElementById(section.toLowerCase())
-      ?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(section.toLowerCase());
+    if (!el) return;
+    const navHeight = 72;
+    const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+    window.scrollTo({ top, behavior: "smooth" });
     setMenuOpen(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -279,10 +291,10 @@ export default function App() {
           style={{ transitionDelay: "0.4s" }}
         >
           <p className="hero-desc">
-            Frontend Developer specializing in{" "}
-            <strong>React.js, Next.js and TypeScript</strong>. Based in
-            Ahmedabad and available as an <strong>Immediate Joiner</strong>. I
-            build scalable, high-performance web applications with modern UI/UX.
+            Frontend developer with <strong>3+ years</strong> crafting
+            enterprise-grade interfaces. Specialized in React.js, Next.js &amp;
+            TypeScript — turning complex requirements into elegant, performant
+            user experiences.
           </p>
         </div>
         <div
@@ -612,6 +624,16 @@ export default function App() {
         <span className="logo-bracket">{" />"}</span>
         {" · Built with React · 2026"}
       </footer>
+
+      {/* GO TO TOP */}
+      <button
+        className={`go-top-btn ${showScrollTop ? "go-top-visible" : ""}`}
+        onClick={scrollToTop}
+        aria-label="Go to top"
+        title="Back to top"
+      >
+        ↑
+      </button>
     </div>
   );
 }

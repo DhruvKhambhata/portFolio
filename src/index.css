@@ -8,6 +8,7 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   background: #030712;
+  scroll-padding-top: 72px;
 }
 
 body {
