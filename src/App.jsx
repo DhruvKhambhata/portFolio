@@ -20,6 +20,7 @@ const PROJECTS = [
     tech: ["Next.js", "React", "TypeScript", "Node.js", "Firebase", "MongoDB", "Tailwind", "Redux"],
     metrics: ["+30% completion", "+35% engagement", "Dark mode", "Push notifications"],
     color: "#00D4FF",
+    liveUrl: "https://trackflow-beryl.vercel.app/",
   },
   {
     title: "Quiz App",
@@ -28,6 +29,7 @@ const PROJECTS = [
     tech: ["React.js", "TypeScript", "Material UI"],
     metrics: ["+40% participation", "-25% bugs", "Real-time scoring", "Responsive"],
     color: "#FF6B6B",
+    liveUrl: "https://quiezapp.netlify.app/",
   },
 ];
 
@@ -49,7 +51,7 @@ export default function App() {
   const handleResumeDownload = () => {
     setDownloading(true);
     const link = document.createElement("a");
-    link.href = "/resume/Dhruv_Khambhata_Frontend_Developer_Resume.pdf";
+    link.href = "/resume/Dhruv_Khambhata_Resume.pdf";
     link.download = "Dhruv_Khambhata_Frontend_Developer_Resume.pdf";
     document.body.appendChild(link);
     link.click();
@@ -271,6 +273,16 @@ export default function App() {
                   <span key={t} className="skill-tag">{t}</span>
                 ))}
               </div>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="live-demo-btn"
+                style={{ borderColor: project.color, color: project.color }}
+              >
+                <span className="live-dot" style={{ background: project.color }} />
+                Live Demo ↗
+              </a>
             </div>
           ))}
         </div>
