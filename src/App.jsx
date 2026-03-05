@@ -53,7 +53,7 @@ const PROJECTS = [
       "Push notifications",
     ],
     color: "#00D4FF",
-    liveUrl: "https://trackflow-beryl.vercel.app/",
+    liveUrl: "https://daily-trackflow.vercel.app/",
   },
   {
     title: "Quiz App",
@@ -68,7 +68,7 @@ const PROJECTS = [
       "Responsive",
     ],
     color: "#FF6B6B",
-    liveUrl: "https://quiezapp.netlify.app/",
+    liveUrl: "https://kwize.vercel.app/",``
   },
 ];
 
@@ -608,7 +608,7 @@ export default function App() {
             Let&apos;s build something amazing together.
           </p>
           <div className="contact-btns">
-            <a
+            <a 
               href="mailto:khambhatadhruv28@gmail.com"
               className="btn btn-primary"
             >
