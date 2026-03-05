@@ -2,18 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#030712" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="DK Portfolio" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+
+    <!-- SEO -->
     <meta name="description" content="Dhruv Khambhata - Frontend Developer with 3+ years of experience in React.js, Next.js, TypeScript and modern JavaScript." />
     <meta name="keywords" content="Dhruv Khambhata, Frontend Developer, React, Next.js, TypeScript, Portfolio" />
     <meta name="author" content="Dhruv Khambhata" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://dhruv-web-portfolio.netlify.app/" />
+
+    <!-- Open Graph -->
     <meta property="og:title" content="Dhruv Khambhata | Frontend Developer" />
     <meta property="og:description" content="Frontend developer crafting enterprise-grade interfaces with React.js, Next.js & TypeScript." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dhruv-web-portfolio.netlify.app/" />
+    <meta property="og:image" content="/icons/icon-512.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dhruv Khambhata | Frontend Developer" />
+    <meta name="twitter:description" content="Frontend developer crafting enterprise-grade interfaces with React.js, Next.js & TypeScript." />
+
     <title>Dhruv Khambhata | Frontend Developer</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- Register Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>

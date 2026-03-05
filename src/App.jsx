@@ -122,7 +122,7 @@ export default function App() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="mobile-overlay">
-          <button className="close-btn" onClick={() => setMenuOpen(false)}>✕</button>
+          <button className="close-btn" aria-label="Close navigation menu" onClick={() => setMenuOpen(false)}>✕</button>
           {NAV_LINKS.map((link) => (
             <div key={link} className="mobile-nav-link" onClick={() => scrollTo(link)}>{link}</div>
           ))}
@@ -142,12 +142,12 @@ export default function App() {
           ))}
         </div>
         <div className="nav-actions desktop-nav">
-          <button className="resume-nav-btn" onClick={handleResumeDownload}>
-            {downloading ? <span className="spinner" /> : "↓"} Resume
+          <button className="resume-nav-btn" aria-label="Download Resume" onClick={handleResumeDownload}>
+            {downloading ? <span className="spinner" aria-hidden="true" /> : "↓"} Resume
           </button>
           <a href="mailto:khambhatadhruv28@gmail.com" className="btn btn-primary">Hire Me</a>
         </div>
-        <button className="hamburger" onClick={() => setMenuOpen(true)}>
+        <button className="hamburger" aria-label="Open navigation menu" onClick={() => setMenuOpen(true)}>
           <span /><span /><span />
         </button>
       </nav>
@@ -179,8 +179,8 @@ export default function App() {
         </div>
         <div className={`fade-up ${isLoaded ? "loaded" : ""} hero-ctas`} style={{ transitionDelay: "0.5s" }}>
           <a href="mailto:khambhatadhruv28@gmail.com" className="btn btn-primary">Get in Touch ↗</a>
-          <button className="btn btn-resume" onClick={handleResumeDownload}>
-            <span>{downloading ? <><span className="spinner" /> Downloading...</> : <>↓ Download Resume</>}</span>
+          <button className="btn btn-resume" aria-label="Download Resume PDF" onClick={handleResumeDownload}>
+            <span>{downloading ? <><span className="spinner" aria-hidden="true" /> Downloading...</> : <>↓ Download Resume</>}</span>
           </button>
           <a href="https://github.com/DhruvKhambhata" target="_blank" rel="noreferrer" className="btn btn-outline">GitHub</a>
           <a href="https://linkedin.com/in/dhruv-khambhata" target="_blank" rel="noreferrer" className="btn btn-outline">LinkedIn</a>
@@ -343,8 +343,8 @@ export default function App() {
           </p>
           <div className="contact-btns">
             <a href="mailto:khambhatadhruv28@gmail.com" className="btn btn-primary">✉️ khambhatadhruv28@gmail.com</a>
-            <button className="btn btn-resume" onClick={handleResumeDownload}>
-              <span>{downloading ? <><span className="spinner" /> Downloading...</> : <>↓ Download Resume</>}</span>
+            <button className="btn btn-resume" aria-label="Download Resume PDF" onClick={handleResumeDownload}>
+              <span>{downloading ? <><span className="spinner" aria-hidden="true" /> Downloading...</> : <>↓ Download Resume</>}</span>
             </button>
             <a href="tel:+917990603842" className="btn btn-outline">📞 +91 79906 03842</a>
           </div>
