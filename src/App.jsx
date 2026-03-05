@@ -83,9 +83,9 @@ export default function App() {
 
   const titles = [
     "Frontend Developer",
-    "React Specialist",
-    "UI Architect",
-    "TypeScript Engineer",
+    "React.js & Next.js Developer",
+    "TypeScript Frontend Engineer",
+    "MERN Stack Developer",
   ];
   const [titleIdx, setTitleIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
