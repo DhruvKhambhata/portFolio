@@ -95,7 +95,7 @@ export default function App() {
   const handleResumeDownload = () => {
     setDownloading(true);
     const link = document.createElement("a");
-    link.href = "/resume/Dhruv_Khambhata_Resume.pdf";
+    link.href = "/resume/Dhruv_Khambhata_Frontend_Developer_Resume.pdf";
     link.download = "Dhruv_Khambhata_Frontend_Developer_Resume.pdf";
     document.body.appendChild(link);
     link.click();
