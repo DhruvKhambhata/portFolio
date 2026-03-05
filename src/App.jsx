@@ -68,7 +68,7 @@ const PROJECTS = [
       "Responsive",
     ],
     color: "#FF6B6B",
-    liveUrl: "https://kwize.vercel.app/",``
+    liveUrl: "https://kwize.vercel.app/",
   },
 ];
 
